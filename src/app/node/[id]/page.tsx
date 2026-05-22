@@ -1,6 +1,12 @@
 import { supabase } from '@/lib/supabase';
 import Link from 'next/link';
 
+type SyllabusNode = {
+  id: string;
+  title: string;
+  description: string | null;
+};
+
 export default async function NodePage({
   params,
 }: {
@@ -30,7 +36,7 @@ export default async function NodePage({
       <h1 className="text-2xl font-bold mb-6">محتوى المادة</h1>
 
       <div className="grid gap-4">
-        {subNodes?.map((node: any) => (
+        {subNodes?.map((node: SyllabusNode) => (
           <div key={node.id} className="p-6 border rounded-xl">
             <h2 className="text-lg font-semibold">{node.title}</h2>
             <p className="text-gray-600">{node.description}</p>

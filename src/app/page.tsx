@@ -1,6 +1,12 @@
 import { supabase } from '@/lib/supabase';
 // Using a plain anchor tag instead of next/link to avoid missing-type errors in some TypeScript setups
 
+type SyllabusNode = {
+  id: string;
+  title: string;
+  description: string | null;
+};
+
 export default async function Home() {
   const { data: nodes } = await supabase.from('syllabus_nodes').select('*').eq('depth', 0);
   
@@ -14,7 +20,7 @@ export default async function Home() {
         Try procedural question demo
       </a>
       <div className="grid gap-4">
-        {nodes?.map((node: any) => (
+        {nodes?.map((node: SyllabusNode) => (
           <a key={node.id} href={`/node/${node.id}`} className="p-6 border rounded-xl hover:bg-slate-50 block">
             <h2 className="text-xl font-bold text-blue-600">{node.title}</h2>
             <p className="text-gray-600">{node.description}</p>
