@@ -1,15 +1,28 @@
-import { createGrossProfitQuestion } from "@/engine/generation";
+import {
+  createQuestionByType,
+  type ProceduralQuestionType,
+} from "@/engine/generation";
+
+const questionTypes: ProceduralQuestionType[] = [
+  "gross-profit",
+  "current-ratio",
+];
+
+function pickRandomQuestionType(): ProceduralQuestionType {
+  const randomIndex = Math.floor(Math.random() * questionTypes.length);
+
+  return questionTypes[randomIndex];
+}
 
 export default function DemoPage() {
-  const question = createGrossProfitQuestion();
+  const selectedQuestionType = pickRandomQuestionType();
+  const question = createQuestionByType(selectedQuestionType);
 
   return (
     <main className="mx-auto max-w-2xl p-10">
       <h1 className="mb-2 text-3xl font-bold">Engine demo</h1>
       <p className="mb-8 text-gray-600">
-        Procedural gross profit question (revenue{" "}
-        {question.inputs.revenue.toLocaleString()} · cost of sales{" "}
-        {question.inputs.costOfSales.toLocaleString()})
+        Procedural {question.questionType} question
       </p>
 
       <div className="space-y-6 rounded-xl border border-gray-200 bg-white p-6 shadow-sm">

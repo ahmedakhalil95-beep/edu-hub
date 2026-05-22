@@ -11,3 +11,9 @@ export {
 } from "./resolve-current-ratio-question";
 
 export { createCurrentRatioQuestion } from "./create-current-ratio-question";
+
+export {
+  createQuestionByType,
+  questionTypeRegistry,
+  type ProceduralQuestionType,
+} from "./question-type-registry";
