@@ -25,6 +25,7 @@ export function createGrossProfitQuestion(
 
   const draft: Question = {
     questionId: crypto.randomUUID(),
+    questionType: "gross-profit",
     version: 1,
     engineVersion: ENGINE_VERSION,
     generationSeed,

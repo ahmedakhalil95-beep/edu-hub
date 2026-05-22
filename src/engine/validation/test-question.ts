@@ -2,6 +2,7 @@ import { validateQuestion } from "./validate-question";
 
 const validQuestion = {
   questionId: "q-001",
+  questionType: "gross-profit",
   version: 1,
   engineVersion: "1.0.0",
   generationSeed: "seed-abc",
@@ -18,6 +19,7 @@ const validQuestion = {
 
 const invalidQuestion = {
   questionId: "q-002",
+  questionType: "gross-profit",
   version: 0,
   engineVersion: "1.0.0",
   generationSeed: "seed-xyz",

@@ -3,6 +3,7 @@ import type { Question } from "@/shared/schemas/question.schema";
 
 const validQuestion: Question = {
   questionId: "gp-001",
+  questionType: "gross-profit",
   version: 1,
   engineVersion: "1.0.0",
   generationSeed: "seed-gp-001",
@@ -19,6 +20,7 @@ const validQuestion: Question = {
 
 const invalidMissingCostOfSales: Question = {
   questionId: "gp-002",
+  questionType: "gross-profit",
   version: 1,
   engineVersion: "1.0.0",
   generationSeed: "seed-gp-002",
