@@ -24,6 +24,24 @@ export default function SyllabusPage() {
             </h2>
             <p className="mt-2 text-gray-700">{outcome.description}</p>
 
+            <div className="mt-4 rounded-lg border border-blue-100 bg-blue-50 p-4 text-sm text-blue-950">
+              <h3 className="mb-2 font-semibold uppercase tracking-wide text-blue-700">
+                Official ACCA PM Mapping
+              </h3>
+              <p>
+                <span className="font-semibold">Section:</span>{" "}
+                {outcome.sectionCode} - {outcome.sectionTitle}
+              </p>
+              <p className="mt-1">
+                <span className="font-semibold">Topic:</span>{" "}
+                {outcome.topicCode} - {outcome.topicTitle}
+              </p>
+              <p className="mt-1">
+                <span className="font-semibold">Official LO:</span>{" "}
+                {outcome.officialLearningOutcomeCode}
+              </p>
+            </div>
+
             <div className="mt-4 grid gap-3">
               <div className="rounded-lg bg-gray-50 p-4">
                 <h3 className="mb-1 text-sm font-semibold uppercase tracking-wide text-gray-500">
