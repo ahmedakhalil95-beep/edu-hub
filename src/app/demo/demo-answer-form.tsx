@@ -5,6 +5,7 @@ import {
   gradeNumericAnswer,
   type NumericGradeResult,
 } from "@/engine/grading/grade-numeric-answer";
+import { supabase } from "@/lib/supabase";
 
 type DemoAnswerFormProps = {
   expectedAnswer: number;
@@ -24,8 +25,31 @@ type StudentAttempt = {
   submittedAt: string;
 };
 
+type SaveStatus = "idle" | "saving" | "saved" | "error";
+
 function formatNumber(value: number) {
   return value.toFixed(2);
+}
+
+async function saveStudentAttempt(attempt: StudentAttempt) {
+  if (attempt.studentAnswer === null) {
+    return;
+  }
+
+  const { error } = await supabase.from("student_attempts").insert({
+    question_type: attempt.questionType,
+    generation_seed: attempt.generationSeed,
+    question_hash: attempt.hash,
+    student_answer: attempt.studentAnswer,
+    expected_answer: attempt.expectedAnswer,
+    is_correct: attempt.isCorrect,
+    difference: attempt.difference,
+    submitted_at: attempt.submittedAt,
+  });
+
+  if (error) {
+    throw error;
+  }
 }
 
 export function DemoAnswerForm({
@@ -42,12 +66,14 @@ export function DemoAnswerForm({
   const [latestAttempt, setLatestAttempt] = useState<StudentAttempt | null>(
     null,
   );
+  const [saveStatus, setSaveStatus] = useState<SaveStatus>("idle");
+  const [saveErrorMessage, setSaveErrorMessage] = useState("");
 
-  function saveAttempt(
+  function createAttempt(
     submittedAnswer: number | null,
     result: NumericGradeResult,
   ) {
-    setLatestAttempt({
+    return {
       questionType,
       generationSeed,
       hash,
@@ -56,10 +82,10 @@ export function DemoAnswerForm({
       isCorrect: result.isCorrect,
       difference: result.difference,
       submittedAt: new Date().toISOString(),
-    });
+    };
   }
 
-  function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+  async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
     const numericAnswer = Number(studentAnswerText);
@@ -71,17 +97,34 @@ export function DemoAnswerForm({
         difference: 0,
         feedback: "Please enter a numeric answer.",
       };
+      const attempt = createAttempt(null, result);
 
       setGradeResult(result);
-      saveAttempt(null, result);
+      setLatestAttempt(attempt);
+      setSaveStatus("idle");
+      setSaveErrorMessage("");
       return;
     }
 
     const result = gradeNumericAnswer(numericAnswer, expectedAnswer);
+    const attempt = createAttempt(numericAnswer, result);
 
     setStudentAnswer(numericAnswer);
     setGradeResult(result);
-    saveAttempt(numericAnswer, result);
+    setLatestAttempt(attempt);
+    setSaveStatus("saving");
+    setSaveErrorMessage("");
+
+    try {
+      await saveStudentAttempt(attempt);
+      setSaveStatus("saved");
+    } catch (error) {
+      console.error("Supabase student attempt insert failed:", error);
+      setSaveStatus("error");
+      setSaveErrorMessage(
+        error instanceof Error ? error.message : "Unknown Supabase error",
+      );
+    }
   }
 
   return (
@@ -126,6 +169,15 @@ export function DemoAnswerForm({
             <span className="font-semibold">Feedback:</span>{" "}
             {gradeResult.feedback}
           </p>
+          {saveStatus !== "idle" && (
+            <p>
+              <span className="font-semibold">Save status:</span>{" "}
+              {saveStatus === "saving" && "Saving attempt..."}
+              {saveStatus === "saved" && "Attempt saved."}
+              {saveStatus === "error" &&
+                `Attempt could not be saved: ${saveErrorMessage}`}
+            </p>
+          )}
 
           {latestAttempt && (
             <div className="border-t border-gray-200 pt-3">
