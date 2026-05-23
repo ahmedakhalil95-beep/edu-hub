@@ -5,6 +5,12 @@ export type PMSyllabusLearningOutcome = {
   loId: string;
   title: string;
   description: string;
+  sectionCode: string;
+  sectionTitle: string;
+  topicCode: string;
+  topicTitle: string;
+  officialLearningOutcomeCode: string;
+  officialLearningOutcomeText: string;
   questionTypes: ProceduralQuestionType[];
   plainEnglish: string;
   formula: string;
@@ -27,6 +33,8 @@ export type PMSyllabusChapter = {
   chapterNumber: number;
   title: string;
   description: string;
+  sectionCode: string;
+  sectionTitle: string;
   topics: PMSyllabusTopic[];
 };
 
@@ -57,6 +65,8 @@ export const pmSyllabus: PMSyllabusArea[] = [
         title: "Financial Ratios and Performance Analysis",
         description:
           "Learn how to calculate and interpret core performance and liquidity ratios.",
+        sectionCode: "E",
+        sectionTitle: "Performance measurement and control",
         topics: [
           {
             type: "topic",
@@ -70,6 +80,14 @@ export const pmSyllabus: PMSyllabusArea[] = [
                 title: "Calculate and interpret the current ratio",
                 description:
                   "Use current assets and current liabilities to calculate and interpret short-term liquidity.",
+                sectionCode: "E",
+                sectionTitle: "Performance measurement and control",
+                topicCode: "E1",
+                topicTitle:
+                  "Performance analysis in private sector, public sector and not-for-profit organisations",
+                officialLearningOutcomeCode: "E1a",
+                officialLearningOutcomeText:
+                  "Financial performance indicators including profitability, liquidity, efficiency and gearing.",
                 questionTypes: ["current-ratio"],
                 plainEnglish:
                   "Current ratio checks whether short-term assets are enough to cover short-term debts.",
@@ -92,6 +110,14 @@ export const pmSyllabus: PMSyllabusArea[] = [
                 title: "Calculate and interpret the quick ratio",
                 description:
                   "Use current assets, inventory, and current liabilities to calculate and interpret quick liquidity.",
+                sectionCode: "E",
+                sectionTitle: "Performance measurement and control",
+                topicCode: "E1",
+                topicTitle:
+                  "Performance analysis in private sector, public sector and not-for-profit organisations",
+                officialLearningOutcomeCode: "E1a",
+                officialLearningOutcomeText:
+                  "Financial performance indicators including profitability, liquidity, efficiency and gearing.",
                 questionTypes: ["quick-ratio"],
                 plainEnglish:
                   "Quick ratio checks whether the business can pay short-term debts without relying on selling inventory.",
@@ -115,6 +141,14 @@ export const pmSyllabus: PMSyllabusArea[] = [
                 title: "Calculate and interpret gross profit margin",
                 description:
                   "Use revenue and cost of sales to calculate and interpret gross profit margin.",
+                sectionCode: "E",
+                sectionTitle: "Performance measurement and control",
+                topicCode: "E1",
+                topicTitle:
+                  "Performance analysis in private sector, public sector and not-for-profit organisations",
+                officialLearningOutcomeCode: "E1a",
+                officialLearningOutcomeText:
+                  "Financial performance indicators including profitability, liquidity, efficiency and gearing.",
                 questionTypes: ["gross-profit"],
                 plainEnglish:
                   "Gross profit margin shows how much of each sale is left after covering the direct cost of making or buying the goods sold.",

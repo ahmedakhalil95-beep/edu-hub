@@ -16,8 +16,21 @@ describe("PM syllabus helpers", () => {
     expect(chapters[0]).toMatchObject({
       chapterId: "PM_CHAPTER_RATIOS",
       chapterNumber: 1,
+      sectionCode: "E",
       title: "Financial Ratios and Performance Analysis",
     });
+  });
+
+  it("maps ratio outcomes to official Topic E1", () => {
+    const outcomes = getAllLearningOutcomes();
+
+    expect(outcomes.every((outcome) => outcome.topicCode === "E1")).toBe(true);
+  });
+
+  it("maps current ratio to official learning outcome E1a", () => {
+    const outcome = getLearningOutcomeById("PM_RATIO_CURRENT");
+
+    expect(outcome?.officialLearningOutcomeCode).toBe("E1a");
   });
 
   it("returns the three starter PM learning outcomes", () => {
