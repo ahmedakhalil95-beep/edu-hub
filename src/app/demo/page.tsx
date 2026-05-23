@@ -79,15 +79,6 @@ export default function DemoPage() {
           <p className="break-all font-mono text-sm text-gray-800">{question.hash}</p>
         </section>
 
-        <section>
-          <h2 className="mb-1 text-sm font-semibold uppercase tracking-wide text-gray-500">
-            Correct answer
-          </h2>
-          <p className="rounded-lg bg-green-50 p-4 text-green-900">
-            {question.correctAnswer}
-          </p>
-        </section>
-
         <DemoAnswerForm
           expectedAnswer={expectedAnswer}
           generationSeed={question.generationSeed}
