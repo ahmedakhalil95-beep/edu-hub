@@ -1,6 +1,7 @@
 import { describe, expect, it } from "vitest";
 import type { ProceduralQuestionType } from "@/engine/generation";
 import {
+  getAllChapters,
   getAllLearningOutcomes,
   getLearningOutcomeById,
   getLearningOutcomeForQuestionType,
@@ -8,6 +9,17 @@ import {
 } from "./pm-syllabus";
 
 describe("PM syllabus helpers", () => {
+  it("returns the starter PM chapter", () => {
+    const chapters = getAllChapters();
+
+    expect(chapters).toHaveLength(1);
+    expect(chapters[0]).toMatchObject({
+      chapterId: "PM_CHAPTER_RATIOS",
+      chapterNumber: 1,
+      title: "Financial Ratios and Performance Analysis",
+    });
+  });
+
   it("returns the three starter PM learning outcomes", () => {
     const outcomes = getAllLearningOutcomes();
 
