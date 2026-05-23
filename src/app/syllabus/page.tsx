@@ -29,27 +29,25 @@ export default function SyllabusPage() {
                 <h3 className="mb-1 text-sm font-semibold uppercase tracking-wide text-gray-500">
                   Detailed Explanation
                 </h3>
-                <p className="text-gray-700">
-                  Detailed lesson content will be added here.
-                </p>
+                <p className="text-gray-700">{outcome.detailedExplanation}</p>
               </div>
 
               <div className="rounded-lg bg-gray-50 p-4">
                 <h3 className="mb-1 text-sm font-semibold uppercase tracking-wide text-gray-500">
                   Worked Example
                 </h3>
-                <p className="text-gray-700">
-                  A worked example will be added here.
-                </p>
+                <p className="text-gray-700">{outcome.workedExample}</p>
               </div>
 
               <div className="rounded-lg bg-gray-50 p-4">
                 <h3 className="mb-1 text-sm font-semibold uppercase tracking-wide text-gray-500">
                   Common Mistakes
                 </h3>
-                <p className="text-gray-700">
-                  Common mistakes will be added here.
-                </p>
+                <ul className="list-disc space-y-1 pl-5 text-gray-700">
+                  {outcome.commonMistakes.map((mistake) => (
+                    <li key={mistake}>{mistake}</li>
+                  ))}
+                </ul>
               </div>
             </div>
 
