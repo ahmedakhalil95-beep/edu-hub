@@ -39,6 +39,32 @@ export default async function Home() {
           </p>
         </div>
       </section>
+      <section className="mb-6 grid gap-3 rounded-xl border border-gray-200 bg-white p-6 sm:grid-cols-3">
+        <div>
+          <h2 className="text-sm font-semibold uppercase tracking-wide text-gray-500">
+            Practice Accuracy
+          </h2>
+          <p className="mt-1 font-semibold text-gray-900">
+            Not enough data yet
+          </p>
+        </div>
+        <div>
+          <h2 className="text-sm font-semibold uppercase tracking-wide text-gray-500">
+            Weakest Topic
+          </h2>
+          <p className="mt-1 font-semibold text-gray-900">
+            Not available yet
+          </p>
+        </div>
+        <div>
+          <h2 className="text-sm font-semibold uppercase tracking-wide text-gray-500">
+            Recommended Next Step
+          </h2>
+          <p className="mt-1 font-semibold text-gray-900">
+            Start with Revision Capsules
+          </p>
+        </div>
+      </section>
       <div className="mb-6 flex flex-wrap gap-3">
         <a
           href="/demo"
