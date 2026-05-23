@@ -1,8 +1,8 @@
 import {
   createQuestionByType,
+  getExpectedNumericAnswer,
   type ProceduralQuestionType,
 } from "@/engine/generation";
-import type { Question } from "@/shared/schemas/question.schema";
 import { DemoAnswerForm } from "./demo-answer-form";
 
 export const dynamic = "force-dynamic";
@@ -17,25 +17,6 @@ function pickRandomQuestionType(): ProceduralQuestionType {
   const randomIndex = Math.floor(Math.random() * questionTypes.length);
 
   return questionTypes[randomIndex];
-}
-
-function getExpectedNumericAnswer(question: Question) {
-  if (question.questionType === "gross-profit") {
-    return question.inputs.revenue - question.inputs.costOfSales;
-  }
-
-  if (question.questionType === "current-ratio") {
-    return question.inputs.currentAssets / question.inputs.currentLiabilities;
-  }
-
-  if (question.questionType === "quick-ratio") {
-    return (
-      (question.inputs.currentAssets - question.inputs.inventory) /
-      question.inputs.currentLiabilities
-    );
-  }
-
-  throw new Error(`Unsupported question type: ${question.questionType}`);
 }
 
 export default function DemoPage() {

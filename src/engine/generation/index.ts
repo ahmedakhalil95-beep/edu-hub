@@ -19,6 +19,8 @@ export {
 
 export { createQuickRatioQuestion } from "./create-quick-ratio-question";
 
+export { getExpectedNumericAnswer } from "./get-expected-numeric-answer";
+
 export {
   createQuestionByType,
   questionTypeRegistry,
