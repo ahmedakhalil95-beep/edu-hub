@@ -1,3 +1,4 @@
+import { getAllLearningOutcomes } from '@/domains/syllabus/pm-syllabus';
 import { supabase } from '@/lib/supabase';
 // Using a plain anchor tag instead of next/link to avoid missing-type errors in some TypeScript setups
 
@@ -9,10 +10,35 @@ type SyllabusNode = {
 
 export default async function Home() {
   const { data: nodes } = await supabase.from('syllabus_nodes').select('*').eq('depth', 0);
+  const activeLearningOutcomeCount = getAllLearningOutcomes().length;
   
   return (
     <main className="p-10">
       <h1 className="text-3xl font-bold mb-6">قائمة المواد الدراسية</h1>
+      <section className="mb-6 grid gap-3 rounded-xl border border-gray-200 bg-white p-6 sm:grid-cols-3">
+        <div>
+          <h2 className="text-sm font-semibold uppercase tracking-wide text-gray-500">
+            PM Syllabus Completion
+          </h2>
+          <p className="mt-1 text-2xl font-bold text-gray-900">0%</p>
+        </div>
+        <div>
+          <h2 className="text-sm font-semibold uppercase tracking-wide text-gray-500">
+            Active Learning Outcomes
+          </h2>
+          <p className="mt-1 text-2xl font-bold text-gray-900">
+            {activeLearningOutcomeCount}
+          </p>
+        </div>
+        <div>
+          <h2 className="text-sm font-semibold uppercase tracking-wide text-gray-500">
+            Current Focus
+          </h2>
+          <p className="mt-1 font-semibold text-gray-900">
+            Financial ratios / performance analysis
+          </p>
+        </div>
+      </section>
       <div className="mb-6 flex flex-wrap gap-3">
         <a
           href="/demo"
