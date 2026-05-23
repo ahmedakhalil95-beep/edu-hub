@@ -6,6 +6,9 @@ export type PMSyllabusLearningOutcome = {
   title: string;
   description: string;
   questionTypes: ProceduralQuestionType[];
+  plainEnglish: string;
+  formula: string;
+  examinerTrap: string;
 };
 
 export type PMSyllabusTopic = {
@@ -47,6 +50,11 @@ export const pmSyllabus: PMSyllabusArea[] = [
             description:
               "Use current assets and current liabilities to calculate and interpret short-term liquidity.",
             questionTypes: ["current-ratio"],
+            plainEnglish:
+              "Current ratio checks whether short-term assets are enough to cover short-term debts.",
+            formula: "Current ratio = Current assets / Current liabilities",
+            examinerTrap:
+              "A higher ratio is not always better if too much cash or inventory is sitting unused.",
           },
           {
             type: "learning-outcome",
@@ -55,6 +63,12 @@ export const pmSyllabus: PMSyllabusArea[] = [
             description:
               "Use current assets, inventory, and current liabilities to calculate and interpret quick liquidity.",
             questionTypes: ["quick-ratio"],
+            plainEnglish:
+              "Quick ratio focuses on assets that can usually be turned into cash quickly.",
+            formula:
+              "Quick ratio = (Current assets - Inventory) / Current liabilities",
+            examinerTrap:
+              "Do not include inventory when calculating the quick ratio.",
           },
           {
             type: "learning-outcome",
@@ -63,6 +77,12 @@ export const pmSyllabus: PMSyllabusArea[] = [
             description:
               "Use revenue and cost of sales to calculate and interpret gross profit margin.",
             questionTypes: ["gross-profit"],
+            plainEnglish:
+              "Gross profit margin shows how much profit is left from sales after covering direct costs.",
+            formula:
+              "Gross profit margin = Gross profit / Revenue x 100",
+            examinerTrap:
+              "Use gross profit, not net profit, when calculating gross profit margin.",
           },
         ],
       },
