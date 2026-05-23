@@ -80,7 +80,12 @@ export default function DemoPage() {
           </p>
         </section>
 
-        <DemoAnswerForm expectedAnswer={expectedAnswer} />
+        <DemoAnswerForm
+          expectedAnswer={expectedAnswer}
+          generationSeed={question.generationSeed}
+          hash={question.hash}
+          questionType={question.questionType}
+        />
       </div>
     </main>
   );

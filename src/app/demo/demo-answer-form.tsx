@@ -8,18 +8,56 @@ import {
 
 type DemoAnswerFormProps = {
   expectedAnswer: number;
+  generationSeed: string;
+  hash: string;
+  questionType: string;
+};
+
+type StudentAttempt = {
+  questionType: string;
+  generationSeed: string;
+  hash: string;
+  studentAnswer: number | null;
+  expectedAnswer: number;
+  isCorrect: boolean;
+  difference: number;
+  submittedAt: string;
 };
 
 function formatNumber(value: number) {
   return value.toFixed(2);
 }
 
-export function DemoAnswerForm({ expectedAnswer }: DemoAnswerFormProps) {
+export function DemoAnswerForm({
+  expectedAnswer,
+  generationSeed,
+  hash,
+  questionType,
+}: DemoAnswerFormProps) {
   const [studentAnswerText, setStudentAnswerText] = useState("");
   const [studentAnswer, setStudentAnswer] = useState<number | null>(null);
   const [gradeResult, setGradeResult] = useState<NumericGradeResult | null>(
     null,
   );
+  const [latestAttempt, setLatestAttempt] = useState<StudentAttempt | null>(
+    null,
+  );
+
+  function saveAttempt(
+    submittedAnswer: number | null,
+    result: NumericGradeResult,
+  ) {
+    setLatestAttempt({
+      questionType,
+      generationSeed,
+      hash,
+      studentAnswer: submittedAnswer,
+      expectedAnswer,
+      isCorrect: result.isCorrect,
+      difference: result.difference,
+      submittedAt: new Date().toISOString(),
+    });
+  }
 
   function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -28,16 +66,22 @@ export function DemoAnswerForm({ expectedAnswer }: DemoAnswerFormProps) {
 
     if (Number.isNaN(numericAnswer)) {
       setStudentAnswer(null);
-      setGradeResult({
+      const result = {
         isCorrect: false,
         difference: 0,
         feedback: "Please enter a numeric answer.",
-      });
+      };
+
+      setGradeResult(result);
+      saveAttempt(null, result);
       return;
     }
 
+    const result = gradeNumericAnswer(numericAnswer, expectedAnswer);
+
     setStudentAnswer(numericAnswer);
-    setGradeResult(gradeNumericAnswer(numericAnswer, expectedAnswer));
+    setGradeResult(result);
+    saveAttempt(numericAnswer, result);
   }
 
   return (
@@ -82,6 +126,52 @@ export function DemoAnswerForm({ expectedAnswer }: DemoAnswerFormProps) {
             <span className="font-semibold">Feedback:</span>{" "}
             {gradeResult.feedback}
           </p>
+
+          {latestAttempt && (
+            <div className="border-t border-gray-200 pt-3">
+              <h3 className="mb-2 text-sm font-semibold uppercase tracking-wide text-gray-500">
+                Latest attempt
+              </h3>
+              <dl className="grid gap-2 text-sm sm:grid-cols-2">
+                <div>
+                  <dt className="font-semibold">Question type</dt>
+                  <dd>{latestAttempt.questionType}</dd>
+                </div>
+                <div>
+                  <dt className="font-semibold">Generation seed</dt>
+                  <dd>{latestAttempt.generationSeed}</dd>
+                </div>
+                <div>
+                  <dt className="font-semibold">Hash</dt>
+                  <dd className="break-all font-mono">{latestAttempt.hash}</dd>
+                </div>
+                <div>
+                  <dt className="font-semibold">Submitted at</dt>
+                  <dd>{latestAttempt.submittedAt}</dd>
+                </div>
+                <div>
+                  <dt className="font-semibold">Student answer</dt>
+                  <dd>
+                    {latestAttempt.studentAnswer === null
+                      ? "Not a number"
+                      : formatNumber(latestAttempt.studentAnswer)}
+                  </dd>
+                </div>
+                <div>
+                  <dt className="font-semibold">Expected answer</dt>
+                  <dd>{formatNumber(latestAttempt.expectedAnswer)}</dd>
+                </div>
+                <div>
+                  <dt className="font-semibold">Is correct</dt>
+                  <dd>{latestAttempt.isCorrect ? "Yes" : "No"}</dd>
+                </div>
+                <div>
+                  <dt className="font-semibold">Difference</dt>
+                  <dd>{formatNumber(latestAttempt.difference)}</dd>
+                </div>
+              </dl>
+            </div>
+          )}
         </div>
       )}
     </section>
