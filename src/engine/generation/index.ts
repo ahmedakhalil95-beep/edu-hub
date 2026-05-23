@@ -13,6 +13,13 @@ export {
 export { createCurrentRatioQuestion } from "./create-current-ratio-question";
 
 export {
+  resolveQuickRatioQuestion,
+  type QuickRatioQuestionResult,
+} from "./resolve-quick-ratio-question";
+
+export { createQuickRatioQuestion } from "./create-quick-ratio-question";
+
+export {
   createQuestionByType,
   questionTypeRegistry,
   type ProceduralQuestionType,

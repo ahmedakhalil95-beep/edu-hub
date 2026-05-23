@@ -10,6 +10,7 @@ export const dynamic = "force-dynamic";
 const questionTypes: ProceduralQuestionType[] = [
   "gross-profit",
   "current-ratio",
+  "quick-ratio",
 ];
 
 function pickRandomQuestionType(): ProceduralQuestionType {
@@ -25,6 +26,13 @@ function getExpectedNumericAnswer(question: Question) {
 
   if (question.questionType === "current-ratio") {
     return question.inputs.currentAssets / question.inputs.currentLiabilities;
+  }
+
+  if (question.questionType === "quick-ratio") {
+    return (
+      (question.inputs.currentAssets - question.inputs.inventory) /
+      question.inputs.currentLiabilities
+    );
   }
 
   throw new Error(`Unsupported question type: ${question.questionType}`);

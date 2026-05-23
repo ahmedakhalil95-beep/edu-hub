@@ -7,3 +7,8 @@ export {
   calculateCurrentRatio,
   type CurrentRatioResult,
 } from "./calculate-current-ratio";
+
+export {
+  calculateQuickRatio,
+  type QuickRatioResult,
+} from "./calculate-quick-ratio";
