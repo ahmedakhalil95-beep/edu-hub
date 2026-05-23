@@ -3,6 +3,7 @@ import {
   getExpectedNumericAnswer,
   type ProceduralQuestionType,
 } from "@/engine/generation";
+import { getLearningOutcomeForQuestionType } from "@/domains/syllabus/pm-syllabus";
 import { DemoAnswerForm } from "./demo-answer-form";
 
 export const dynamic = "force-dynamic";
@@ -23,6 +24,9 @@ export default function DemoPage() {
   const selectedQuestionType = pickRandomQuestionType();
   const question = createQuestionByType(selectedQuestionType);
   const expectedAnswer = getExpectedNumericAnswer(question);
+  const learningOutcome = getLearningOutcomeForQuestionType(
+    selectedQuestionType,
+  );
 
   return (
     <main className="mx-auto max-w-2xl p-10">
@@ -55,6 +59,29 @@ export default function DemoPage() {
           </h2>
           <p className="text-gray-800">{question.body}</p>
         </section>
+
+        {learningOutcome && (
+          <section>
+            <h2 className="mb-1 text-sm font-semibold uppercase tracking-wide text-gray-500">
+              Learning outcome
+            </h2>
+            <div className="space-y-2 rounded-lg bg-blue-50 p-4 text-blue-950">
+              <p>
+                <span className="font-semibold">Question Type:</span>{" "}
+                {question.questionType}
+              </p>
+              <p>
+                <span className="font-semibold">LO_ID:</span>{" "}
+                <span className="font-mono text-sm">{learningOutcome.loId}</span>
+              </p>
+              <p>
+                <span className="font-semibold">Learning Outcome:</span>{" "}
+                {learningOutcome.title}
+              </p>
+              <p className="mt-1 text-sm">{learningOutcome.description}</p>
+            </div>
+          </section>
+        )}
 
         <section>
           <h2 className="mb-1 text-sm font-semibold uppercase tracking-wide text-gray-500">
