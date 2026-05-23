@@ -18,6 +18,26 @@ Long term, the platform can support:
 - Instructor dashboards
 - More procedural engines across accounting syllabuses
 
+## Syllabus-Aligned Learning Flow
+
+Edu Hub v0.2 uses official ACCA PM syllabus alignment as the scope map for learning and practice.
+
+Current starter alignment:
+
+- Section E: Performance measurement and control
+- Topic E1: Performance analysis
+- Official LO E1a
+
+The product currently includes:
+
+- Dashboard
+- Detailed Syllabus
+- Revision Capsules
+- Practice Demo
+- Attempts Dashboard
+
+Content principle: the ACCA syllabus defines what to cover, Edu Hub content is original, and the deterministic engine verifies calculations and grading.
+
 ## Tech Stack
 
 - Next.js
