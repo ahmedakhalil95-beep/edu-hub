@@ -27,6 +27,16 @@ export default async function Home() {
           View student attempts
         </a>
       </div>
+      <a
+        href="/capsules"
+        className="mb-6 block rounded-xl border border-blue-100 bg-blue-50 p-6 hover:bg-blue-100"
+      >
+        <h2 className="text-xl font-bold text-blue-700">Revision Capsules</h2>
+        <p className="mt-1 text-gray-700">
+          Quick syllabus-linked revision cards mapped to ACCA PM learning
+          outcomes.
+        </p>
+      </a>
       <div className="grid gap-4">
         {nodes?.map((node: SyllabusNode) => (
           <a key={node.id} href={`/node/${node.id}`} className="p-6 border rounded-xl hover:bg-slate-50 block">
