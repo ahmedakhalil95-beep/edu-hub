@@ -5,7 +5,10 @@ import {
   gradeNumericAnswer,
   type NumericGradeResult,
 } from "@/engine/grading/grade-numeric-answer";
-import { supabase } from "@/lib/supabase";
+import {
+  saveStudentAttempt,
+  type StudentAttemptInput,
+} from "@/platform/telemetry/save-student-attempt";
 
 type DemoAnswerFormProps = {
   expectedAnswer: number;
@@ -14,42 +17,10 @@ type DemoAnswerFormProps = {
   questionType: string;
 };
 
-type StudentAttempt = {
-  questionType: string;
-  generationSeed: string;
-  hash: string;
-  studentAnswer: number | null;
-  expectedAnswer: number;
-  isCorrect: boolean;
-  difference: number;
-  submittedAt: string;
-};
-
 type SaveStatus = "idle" | "saving" | "saved" | "error";
 
 function formatNumber(value: number) {
   return value.toFixed(2);
-}
-
-async function saveStudentAttempt(attempt: StudentAttempt) {
-  if (attempt.studentAnswer === null) {
-    return;
-  }
-
-  const { error } = await supabase.from("student_attempts").insert({
-    question_type: attempt.questionType,
-    generation_seed: attempt.generationSeed,
-    question_hash: attempt.hash,
-    student_answer: attempt.studentAnswer,
-    expected_answer: attempt.expectedAnswer,
-    is_correct: attempt.isCorrect,
-    difference: attempt.difference,
-    submitted_at: attempt.submittedAt,
-  });
-
-  if (error) {
-    throw error;
-  }
 }
 
 export function DemoAnswerForm({
@@ -63,9 +34,8 @@ export function DemoAnswerForm({
   const [gradeResult, setGradeResult] = useState<NumericGradeResult | null>(
     null,
   );
-  const [latestAttempt, setLatestAttempt] = useState<StudentAttempt | null>(
-    null,
-  );
+  const [latestAttempt, setLatestAttempt] =
+    useState<StudentAttemptInput | null>(null);
   const [saveStatus, setSaveStatus] = useState<SaveStatus>("idle");
   const [saveErrorMessage, setSaveErrorMessage] = useState("");
 
