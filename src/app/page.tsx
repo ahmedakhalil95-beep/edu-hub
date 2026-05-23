@@ -37,6 +37,15 @@ export default async function Home() {
           outcomes.
         </p>
       </a>
+      <a
+        href="/syllabus"
+        className="mb-6 block rounded-xl border border-blue-100 bg-blue-50 p-6 hover:bg-blue-100"
+      >
+        <h2 className="text-xl font-bold text-blue-700">Detailed Syllabus</h2>
+        <p className="mt-1 text-gray-700">
+          Full PM syllabus lessons mapped to ACCA learning outcomes.
+        </p>
+      </a>
       <div className="grid gap-4">
         {nodes?.map((node: SyllabusNode) => (
           <a key={node.id} href={`/node/${node.id}`} className="p-6 border rounded-xl hover:bg-slate-50 block">
