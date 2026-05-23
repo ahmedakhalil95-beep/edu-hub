@@ -22,7 +22,31 @@ export default function CapsulesPage() {
             <h2 className="text-xl font-semibold text-gray-900">
               {outcome.title}
             </h2>
-            <p className="mt-2 text-gray-700">{outcome.description}</p>
+
+            <div className="mt-4 grid gap-3">
+              <div>
+                <h3 className="mb-1 text-sm font-semibold uppercase tracking-wide text-gray-500">
+                  Plain English
+                </h3>
+                <p className="text-gray-700">{outcome.plainEnglish}</p>
+              </div>
+
+              <div>
+                <h3 className="mb-1 text-sm font-semibold uppercase tracking-wide text-gray-500">
+                  Formula
+                </h3>
+                <p className="font-mono text-sm text-gray-800">
+                  {outcome.formula}
+                </p>
+              </div>
+
+              <div>
+                <h3 className="mb-1 text-sm font-semibold uppercase tracking-wide text-gray-500">
+                  Examiner Trap
+                </h3>
+                <p className="text-gray-700">{outcome.examinerTrap}</p>
+              </div>
+            </div>
 
             <div className="mt-4">
               <h3 className="mb-1 text-sm font-semibold uppercase tracking-wide text-gray-500">
