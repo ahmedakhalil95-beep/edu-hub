@@ -45,10 +45,20 @@ export default function DemoPage() {
 
   return (
     <main className="mx-auto max-w-2xl p-10">
-      <h1 className="mb-2 text-3xl font-bold">Engine demo</h1>
-      <p className="mb-8 text-gray-600">
-        Procedural {question.questionType} question
-      </p>
+      <div className="mb-8 flex flex-wrap items-start justify-between gap-4">
+        <div>
+          <h1 className="mb-2 text-3xl font-bold">Engine demo</h1>
+          <p className="text-gray-600">
+            Procedural {question.questionType} question
+          </p>
+        </div>
+        <a
+          href="/demo"
+          className="rounded-lg border border-gray-200 bg-gray-50 px-4 py-2 font-semibold text-gray-700 hover:bg-gray-100"
+        >
+          New question
+        </a>
+      </div>
 
       <div className="space-y-6 rounded-xl border border-gray-200 bg-white p-6 shadow-sm">
         <section>
