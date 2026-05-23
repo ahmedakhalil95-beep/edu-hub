@@ -182,17 +182,30 @@ The current development policy allows insert and select while authentication is 
 
 ## Quality Checks
 
+Run the automated test suite:
+
+```bash
+npm test
+```
+
 Run linting:
 
 ```bash
-npm.cmd run lint
+npm run lint
 ```
 
 Run TypeScript checks:
 
 ```bash
-npx.cmd tsc --noEmit
+npx tsc --noEmit
 ```
+
+The current core engine test suite covers:
+
+- Calculation engines
+- Expected answer resolution
+- Grading engine
+- Question registry
 
 ## Roadmap
 
